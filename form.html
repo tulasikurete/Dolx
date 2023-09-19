@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OLX | Home</title>
+    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+</head>
+
+<body>
+    <header class="mui-appbar mui--z1">
+        <div class="mui-container">
+            <table>
+                <tr class="mui--appbar-height">
+                    <td class="mui--text-title">OLX</td>
+                    <td class="mui--text-right">
+                        <ul class="mui-list--inline mui--text-body2">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li>
+                                <a id="sign-in" href="/signin.html">Login</a>
+                                <a id="logout" style="display: none" onclick="doLogout(event)">Logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    <div id="content-wrapper" class="mui--text-center">
+        <div id="root"></div>
+    </div>
+
+    <footer>
+        <div class="mui-container mui--text-center">
+            Made with ♥ by <a href="https://www.muicss.com">T3P</a>
+        </div>
+    </footer>
+    <script src="/js/scripts.js"></script>
+    <script src="js/items.js"></script>
+
+    <script>
+        const root = document.querySelector("#root");
+        const form = document.createElement("form");
+        form.classList.add('mui-form');
+        // form.style.width : "50%";
+        const formDiv = document.createElement('div');
+        formDiv.classList.add('mui-textfield');
+
+
+        const formDiv1 = document.createElement("div");
+        const name = document.createElement("input");
+        formDiv1.appendChild(name);
+
+        form.appendChild(formDiv1);
+
+        name.setAttribute("text", "type");
+
+        name.setAttribute("name", "FullName");
+
+        name.setAttribute("placeholder", "Full Name");
+        const formDiv2 = document.createElement("div");
+        const price = document.createElement("input");
+        formDiv2.appendChild(price);
+        form.appendChild(formDiv2);
+
+        price.setAttribute("text", "type");
+        price.setAttribute("Number", "price");
+        price.setAttribute("placeholder", "price");
+        const formDiv3 = document.createElement("div");
+        const location1 = document.createElement("input")
+        formDiv3.appendChild(location1);
+        form.appendChild(formDiv3);
+        location1.setAttribute("text", "type");
+        location1.setAttribute("location", "Location");
+        location1.setAttribute("placeholder", "Location");
+        const formDiv4 = document.createElement("div");
+
+        const formDiv6 = document.createElement("div");
+        const button = document.createElement("button");
+        formDiv6.appendChild(button);
+        button.style.width = "100px";
+        button.style.height = "40px";
+
+        form.appendChild(formDiv6);
+
+        button.innerHTML = "Submit";
+        root.appendChild(form);
+        button.addEventListener("click", addItem);
+
+        function addItem(event) {
+            event.preventDefault();
+            const item = new OlxItem(name.value,
+                price.value,
+                'https://img5.gadgetsnow.com/gd/images/products/additional/large/G239952_View_1/computer-laptop/laptops/dell-inspiron-3501-d560412win9s-laptop-11th-generation-i5-1135g7-integrated-8gb-1tb-hdd-256gb-ssd-windows-10.jpg', location1.value,
+                JSON.parse(sessionStorage.getItem('user')).name,
+                new Date());
+            MOCK_ITEMS.push(item);
+            localStorage.setItem("items", JSON.stringify(MOCK_ITEMS));
+            window.location.href = "/index.html";
+        }
+    </script>
+
+</body>
+
+</html>

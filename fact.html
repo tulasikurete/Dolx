@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button>get country </button>
+    <h4 id="fact"></h4>
+
+
+    <script>
+        const factEl = document.querySelector("#fact");
+        const buttonEl = document.querySelector("button");
+        buttonEl.addEventListener("click", function () {
+            fetch(API)
+                .then((res) => res.json())
+                .then(function (factObj) {
+                    factEl.innerHTML = "name " + " " + factObj.name + ","
+                        + "age" + " " + factObj.age + ","
+                        + "count" + " " + factObj.count;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+        const API = "https://api.agify.io?name=tulasi";
+
+    </script>
+</body>
+
+</html>
